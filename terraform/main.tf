@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-2"
+  region = "us-east-1"
 }
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -16,8 +16,8 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "web" {
-  ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
+  ami = "ami-0fc5d935ebf8bc3bc"
 
   }
 
