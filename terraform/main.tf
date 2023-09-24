@@ -48,3 +48,11 @@ resource "aws_instance" "web" {
   key_name      = aws_key_pair.ssh_key.key_name
  }
 
+resource "aws_eip" "elasticip" {
+  instance = aws_instance.web.id  
+ }
+
+output "EIP" {
+value = aws_eip.elasticip.public_ip
+ }
+
