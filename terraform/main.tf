@@ -33,6 +33,16 @@ resource "aws_security_group" "allow_ssh" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
+  ingress {
+    description      = "http"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+
   egress {
     from_port        = 0
     to_port          = 0
@@ -51,6 +61,15 @@ resource "aws_instance" "web" {
   instance_type = "t2.micro"
   ami = "ami-0fc5d935ebf8bc3bc"
   key_name      = aws_key_pair.ssh_key.key_name
+
+  user_data = <<EOF
+#!/bin/bash
+sudo apt update
+sudo apt install docker
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+sudo docker run -d --name wordpress -p 80:80 wordpress
+EOF
  }
 
 resource "aws_eip" "elasticip" {
@@ -60,4 +79,3 @@ resource "aws_eip" "elasticip" {
 output "EIP" {
 value = aws_eip.elasticip.public_ip
  }
-
