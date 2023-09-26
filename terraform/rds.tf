@@ -33,3 +33,7 @@ resource "aws_security_group" "rds_sg" {
   }
  }
 
+output "RDS_IP" {
+value = aws_db_instance.rds_mysql.address
+ }
+
