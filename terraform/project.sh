@@ -1,4 +1,5 @@
 #!/bin/bash
+cd terraform
 echo "step_1"
 terraform output | grep EIP | awk -F'"' '/"/ {print $2}' >> ../ansible/inventory
 echo "step_2"
