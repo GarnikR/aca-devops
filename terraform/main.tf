@@ -13,8 +13,7 @@ data "aws_ami" "ubuntu" {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-}
-
+ }
 resource "aws_key_pair" "ssh_key" {
   key_name   = "ssh_key"
   public_key = file("~/.ssh/id_rsa.pub")
@@ -61,15 +60,7 @@ resource "aws_instance" "web" {
   instance_type = "t2.micro"
   ami = "ami-0fc5d935ebf8bc3bc"
   key_name      = aws_key_pair.ssh_key.key_name
-
-  user_data = <<EOF
-#!/bin/bash
-sudo apt update
-sudo apt install docker
-sudo service docker start
-sudo usermod -a -G docker ec2-user
-sudo docker run -d --name wordpress -p 80:80 wordpress
-EOF
+  user_data = file("startup.sh")
  }
 
 resource "aws_eip" "elasticip" {
@@ -79,3 +70,4 @@ resource "aws_eip" "elasticip" {
 output "EIP" {
 value = aws_eip.elasticip.public_ip
  }
+
