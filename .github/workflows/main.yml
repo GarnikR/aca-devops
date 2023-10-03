@@ -1,9 +1,10 @@
 name: website
+run-name: ${{github.actor}}
 
 on: [push]
 
 jobs:
-  build:
+  build_website:
     runs-on: ubuntu-latest
 
     steps:
