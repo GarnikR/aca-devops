@@ -9,8 +9,10 @@ jobs:
     name: Deploy Site
     runs-on: ubuntu-latest
     env:
-      TF_WORKING_DIR: terraform
+      TF_WORKING_DIR: ../../terraform
     steps:
+   # - name: Change working directory
+  #   run : cd 
     - name: Checkout Repo
       uses: actions/checkout@v3 
 
