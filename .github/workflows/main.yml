@@ -4,11 +4,13 @@ on:
   push:
   
 jobs:
+
   tf_fmt:
     name: Deploy Site
     runs-on: ubuntu-latest
     steps:
-
+    -name: Go to terraform directory
+     run : "cd terraform"
     - name: Checkout Repo
       uses: actions/checkout@v3 
 
