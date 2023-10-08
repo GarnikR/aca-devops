@@ -1,14 +1,10 @@
-name: website
-run-name: ${{github.actor}}
+## ...
+on:
+  pull_request:
 
-on: [push]
-
-jobs:
-  build_website:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: run a script
-      run: ../../../terraform/project.yaml
-  
+env:
+  TF_CLOUD_ORGANIZATION: "aws_organizations_organization"
+  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
+  TF_WORKSPACE: "learn-terraform-github-actions"
+  CONFIG_DIRECTORY: "./"
+## ...
