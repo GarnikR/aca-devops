@@ -12,9 +12,10 @@ jobs:
       TF_WORKING_DIR: ./terraform
     steps:
     - name: Change working directory
-      run : pwd
+      run : cd terraform
     - name: print working directory
-      run: ls
+      run: |
+            pwd ; ls
     - name: Checkout Repo
       uses: actions/checkout@v3 
 
