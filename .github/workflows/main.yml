@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Change working directory
-      run : cd terraform
+      run : cd /home/runner/work/aca-devops/aca-devops/terraform
     - name: print working directory
       run: |
             pwd ; ls
